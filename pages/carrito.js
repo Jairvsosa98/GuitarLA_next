@@ -1,8 +1,8 @@
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import styles from '../styles/Carrito.module.css'
-const carrito = ({ carrito, actualizarCantidad, eliminarProducto }) => {
+const Carrito = ({ carrito, actualizarCantidad, eliminarProducto }) => {
     const [total, setTotal] = useState()
     useEffect(()=> {
         const calculoTotal = carrito.reduce( (total, producto) => total + (producto.cantidad * producto.precio), 0 )
@@ -16,7 +16,7 @@ const carrito = ({ carrito, actualizarCantidad, eliminarProducto }) => {
                     <h2>Artículos</h2>
                     {carrito.length === 0 ? 'Carrito Vacío' : (
                         carrito.map(producto => (
-                            <div key={producto.id} className={styles.producto}>
+                            <div key={producto._id} className={styles.producto}>
                                 <div>
                                     <Image layout='responsive' width={250} height={500} src={producto.imagen} alt={producto.nombre} />
                                 </div>
@@ -29,7 +29,7 @@ const carrito = ({ carrito, actualizarCantidad, eliminarProducto }) => {
                                             className={styles.select}
                                             onChange={e => actualizarCantidad({
                                                 cantidad: e.target.value,
-                                                id: producto.id
+                                                id: producto._id
                                             })}
                                         >
                                             <option value="1">1</option>
@@ -50,11 +50,11 @@ const carrito = ({ carrito, actualizarCantidad, eliminarProducto }) => {
                                 <button
                                     type='button'
                                     className={styles.eliminar}
-                                    onClick={() => eliminarProducto(producto.id)}
+                                    onClick={() => eliminarProducto(producto._id)}
                                 >
                                     x
                                 </button>
-                            </div>
+                         </div>
                         ))
                     )}
                 </div>
@@ -73,4 +73,4 @@ const carrito = ({ carrito, actualizarCantidad, eliminarProducto }) => {
     )
 }
 
-export default carrito
+export default Carrito

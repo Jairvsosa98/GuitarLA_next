@@ -1,6 +1,6 @@
 import Layout from '../components/Layout'
 import ListadoBlogs from '../components/ListadoBlogs'
-const blog = ({ entradas }) => {
+const Blog = ({ entradas }) => {
 
     return (
         <Layout
@@ -29,4 +29,4 @@ export async function getStaticProps() {
     }
 }
 
-export default blog
+export default Blog
